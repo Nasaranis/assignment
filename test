@@ -1,0 +1,51 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package shortwordgame;
+import java.util.*;
+import java.io.*;
+
+
+/**
+ *
+ * @author SYN
+ */
+
+
+public class ShortWordGame {
+
+    public static void main(String[] args) throws IOException{
+        // TODO code application logic here
+        
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        wordGame wg = new wordGame();
+        wg.gameStart();
+        while(true)
+        {
+            wg.printWords();
+            
+            String input = br.readLine();
+            boolean result = wg.wordValid(input);
+            
+            if(wg.outcome == true)
+            {                
+                System.out.println("Game over");
+                break;
+            }
+            
+            if(result == false)
+            {
+                System.out.println("Entered word is invalid or does not exist in the dictionary, please try again");                
+            }
+            
+            if(wg.continueORterminate == false)
+            {
+                wg.gameRestart();
+            }            
+        }
+        
+    }
+    
+}
