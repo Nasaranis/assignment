@@ -1,0 +1,107 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package shortwordgame;
+import java.util.*;
+import java.io.*;
+import java.util.Scanner; // Import the Scanner class to read text files
+import java.nio.file.*;
+
+/**
+ *
+ * @author SYN
+ */
+public class wordGame {
+    
+// variables
+    public List<String> words;
+    public boolean outcome;
+    public boolean continueORterminate;
+    
+    private List<String> dictionary;
+    
+// methods
+    public void gameStart()
+    {
+        
+        // Initialization
+        dictionary = new ArrayList<String>();
+        words = new ArrayList<String>();
+        
+        // Read Dictionary
+        try (BufferedReader brFile = new BufferedReader(new FileReader("dictionary.txt"))) 
+        {
+            String line;
+            while ((line = brFile.readLine()) != null) {
+               dictionary.add(line);
+            }
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+        
+        words.add("empathy");
+    }
+    public boolean wordValid(String input)
+    {
+        // 1. check if The first character of the next word should start with the last character of the previous word
+        if(words.size() > 0){
+            String lastWord = words.get(words.size() - 1);
+            if(lastWord.charAt(lastWord.length() - 1) != input.charAt(0)) // check the last character of previous word and first character of the next word
+            {
+                continueORterminate = true;
+                return false; // word is inalid
+            }
+        }
+
+        // 2. check if the word is entered before
+        if(words.contains(input))
+        {
+            continueORterminate = false;
+            outcome = true;
+            return false; // game is over
+        }
+
+        // 3. check if input word has correct format
+        for(int i = 0 ; i < input.length() ; i++)
+            if(!((input.charAt(i) >= 'a' && input.charAt(i) <= 'z') || (input.charAt(i) >= 'A' && input.charAt(i) <= 'Z')))
+            {
+                continueORterminate = true;
+                return false; // word has not correct format
+            }
+
+        // 4. check if the word is in dictionary
+        if(!dictionary.contains(input))
+        {
+            continueORterminate = true;
+            return false; // word is not in dictionary
+        }
+        
+        // 5. check if you want to restart game
+        if(input == "")
+        {
+            continueORterminate = false;
+            return false;
+        }
+        
+        // word is valid!
+        continueORterminate = true;
+        words.add(input);
+        return true;
+    }
+    public void gameRestart()
+    {
+        outcome = false;
+        continueORterminate = false;
+        words.clear();
+    }
+    
+    public void printWords()
+    {
+        System.out.println(words);
+    }
+    
+}
