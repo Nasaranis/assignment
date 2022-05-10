@@ -1,0 +1,24 @@
+Sprite animation made by CSC-10026 
+student ID - 21029252. 
+Featuring - Sprite the Sprite
+
+Media:
+
+Sprite: sprite images sketched using GIMP
+Background: Created using - https://www.pixilart.com/
+Sound: MP3 file of music from - https://www.youtube.com/c/AdhesiveWombat
+Sound: MP3 file of music compressed using - https://www.onlineconverter.com/
+
+Animation:
+
+Two-scene sketch.
+
+Scene one: Control of 8-pose sprite and scrolling background, Principles of animation
+Scene two: vertical scrolling credits with centred text, …
+
+Programming: 
+
+Processing sketch programmed on: Processing
+Processing sketch using PImage, arrays, modular arithmetic, text()
+
+Thanks for watching!
